@@ -18,12 +18,12 @@ const generateToken = (id) => {
     })
 }
 
-const generateRefreshToken = async (user) => {
+const generateRefreshToken = async (id) => {
     // create a refresh token that expires in 7 days
     const token = randomTokenString()
     
     const refresh = await RefreshToken.create({
-        user: user.id,
+        user: id,
         token,
         expires: new Date(Date.now() + process.env.JWT_REFRESH_EXPIRATION * 1000)
     })
