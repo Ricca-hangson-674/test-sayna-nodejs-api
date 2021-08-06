@@ -30,18 +30,15 @@ app.use(express.json())
 /** Routes */
 app.use('/', userRoutes)
 
-/** Configuration deployment */
-if (process.env.NODE_ENV === 'production') {
-    app.use(express.static(path.join(__dirname, '/front')))
+const __dirname = path.resolve()
 
-    app.get('*', (req, res) => {
-        res.sendFile(path.resolve(__dirname, 'front', 'index.html'))
-    })
-} else {
-    app.get('/', (req, res) => {
-        res.send('API is running ...')
-    })
-}
+/** Configuration deployment */
+app.use(express.static(path.join(__dirname, '/template')))
+
+app.get('/', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'template', 'index.html'))
+})
+
 
 /** Exception */
 app.use(notFound)
