@@ -6,12 +6,10 @@ const existToken = asyncHandler( async (req, res, next) => {
     console.log('Exist Token', req.user, token)
 
     if (token) {
-
         next()
-
     } else {
         res.status(401)
-        throw new Error("Le token est neccessaire")
+        throw new Error("Le token envoyé n'existe pas")
     }
 })
 
