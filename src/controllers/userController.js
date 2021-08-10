@@ -37,11 +37,18 @@ const login = asyncHandler(async (req, res) => {
     const user = await User.findOne({ email })
 
     if (user && (await user.matchPassword(password))) {
+
+		const token = generateToken(user._id)
+
+		/** Store Token */
+		user.token = token
+		await user.save()
+
         res.json({
 			error: false,
 			message: "L'utilisateur a été authentifié succès",
 			tokens: {
-				token: generateToken(user._id),
+				token: token,
 				refreshToken: await generateRefreshToken(user._id),
 				createdAt: Date.now()
 			}
@@ -235,7 +242,10 @@ const logout = asyncHandler(async (req, res) => {
 	// console.log('User', user, req.user)
 
 	if (user) {
-        // await user.remove()
+		/** Delete Token */
+		user.token = null
+		await user.save()
+	
         res.json({ 
 			error: false,
 			message: "L'utilisateur a été deconnecte success"

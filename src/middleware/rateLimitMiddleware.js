@@ -16,6 +16,8 @@ const limit = process.env.INTERVALLE_TENTATIVE
 const apiLimiter = rateLimit({
     // max: max,
     // windowMs: limit * 60 * 1000,
+    // max: Number(process.env.NOMBRE_TENTATIVE),
+    // windowMs: Number(process.env.INTERVALLE_TENTATIVE),
     max: 5,
     windowMs: 60 * 60 * 1000, // 1heure
     handler: (req, res, /*next*/) => {

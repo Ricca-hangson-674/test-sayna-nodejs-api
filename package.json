@@ -9,7 +9,8 @@
     "server": "nodemon server",
     "data:import": "node seeder",
     "data:destroy": "node seeder -d",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha --timeout 10000 test/user",
+    "test:unit": "node node_modules/mocha/bin/mocha --timeout 10000 test/userTest"
   },
   "keywords": [
     "api",
@@ -36,8 +37,11 @@
     "morgan": "^1.10.0"
   },
   "devDependencies": {
+    "chai": "^4.3.4",
+    "chai-http": "^4.3.0",
     "concurrently": "^5.3.0",
     "faker": "^5.5.3",
+    "mocha": "^9.0.3",
     "nodemon": "^2.0.7"
   }
 }

@@ -46,8 +46,17 @@ app.use(errorHandler)
 
 
 /** Start Server */
-const PORT = process.env.PORT || 5000
+let PORT = ''
+
+if (process.env.NODE_ENV === 'test') {
+    PORT = process.env.PORT_TEST || 5000
+} else {
+    PORT = process.env.PORT || 5000
+}
+
 
 app.listen(
 	PORT, 
 	console.log(`Server running in ${process.env.NODE_ENV} on port ${PORT}`.yellow.bold))
+
+export default app // for testing
