@@ -35,4 +35,6 @@ router.delete('/user/:token', verifyToken, existToken, logout)
 router.get('/user/:token', verifyToken, existToken, getUser)
 
 
+
+
 export default router
